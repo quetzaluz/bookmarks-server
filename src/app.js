@@ -18,7 +18,7 @@ app.use(cors())
 app.use(helmet())
 app.use(validateBearerToken)
 
-app.use(bookmarksRouter)
+app.use('/bookmarks', bookmarksRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello, world!')

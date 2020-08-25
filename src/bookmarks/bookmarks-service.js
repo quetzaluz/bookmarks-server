@@ -11,7 +11,7 @@ const BookmarksService = {
             .where('id', id)
             .first()
     },
-    insertBookmarks(knex, newBookmark) {
+    insertBookmark(knex, newBookmark) {
         return knex 
             .insert(newBookmark)
             .into('bookmarks_list')
