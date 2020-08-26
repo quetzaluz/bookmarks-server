@@ -49,7 +49,7 @@ bookmarksRouter
             logger.info(`Bookmark with id ${bookmark.id} created.`)
             res
                 .status(201)
-                .location(path.posix.join(req.originalUrl, `/${bookmark.id}`))
+                .location(path.posix.join(req.originalUrl, `${bookmark.id}`))
                 .json(serializeBookmark(bookmark))
         })
         .catch(next)
@@ -78,11 +78,13 @@ bookmarksRouter
         res.json(serializeBookmark(res.bookmark))
     })
     .delete((req, res, next) => {
+        const { bookmark_id } = req.params
         BookmarksService.deleteBookmark(
             req.app.get('db'),
             req.params.bookmark_id
         )
-            .then(() => {
+            .then(numRowsAffected => {
+                logger.info(`Bookmark with id ${bookmark_id} deleted.`)
                 res.status(204).end()
             })
             .catch(next)
